@@ -1,10 +1,12 @@
-import '../global.css';
+import { TimerProvider } from "../context/TimerContext";
+import { TimerPage } from "../pages/TimerPage";
+import "../global.css";
 
 function App() {
   return (
-    <main className="container">
-     <h1 className="text-4xl text-red-500 font-bold">Testing TailwindCSS</h1>
-    </main>
+    <TimerProvider>
+      <TimerPage />
+    </TimerProvider>
   );
 }
 
