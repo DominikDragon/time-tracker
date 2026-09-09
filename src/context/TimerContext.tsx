@@ -14,7 +14,7 @@ function createNewTimer(): Timer {
 
 // Context
 
-export type TimerContextValue = {
+type TimerContextValue = {
     timer: Timer;
     startTimer: () => void;
     stopTimer: () => void;

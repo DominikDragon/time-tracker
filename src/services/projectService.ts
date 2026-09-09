@@ -4,12 +4,12 @@ import { getDatabase } from "./database";
 export async function getProjects(): Promise<Project[]> {
     const db = await getDatabase();
 
-    const projects = await db.select<Project[]>("SELECT * FROM projects");
+    const projects = await db.select<Project[]>("SELECT * FROM projects ORDER BY name ASC");
 
     return projects;
 }
 
-export async function createAndAddProject(name: string): Promise<void> {
+export async function createAndAddProject(name: string): Promise<Project> {
     const db = await getDatabase();
 
     const project: Project = {
@@ -25,4 +25,6 @@ export async function createAndAddProject(name: string): Promise<void> {
     } catch (error) {
         console.log(error); // TODO: handle error if name exists
     }
+
+    return project;
 }
