@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
-import type { Timer } from "../types/Timer";
+import type { Timer } from "../types/timer";
 
 // Functions
 
