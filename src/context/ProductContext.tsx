@@ -5,9 +5,9 @@ import type { Project } from "../types/project";
 // Context
 
 type ProjectContextValue = {
-    projects: Project[],
-    createProject: (name: string) => void,
-}
+    projects: Project[];
+    createProject: (name: string) => void;
+};
 
 export const ProjectContext = createContext<ProjectContextValue | null>(null);
 
@@ -30,4 +30,11 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
 
         setProjects((prev) => [...prev, project].sort((a, b) => a.name.localeCompare(b.name)));
     }
+
+    const value: ProjectContextValue = {
+        projects,
+        createProject,
+    };
+
+    return <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>;
 }
