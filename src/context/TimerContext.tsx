@@ -8,6 +8,7 @@ function createNewTimer(): Timer {
         id: crypto.randomUUID(),
         projectId: null,
         durationSeconds: 0,
+        summary: "",
         running: false,
         active: true,
     };
@@ -21,6 +22,7 @@ type TimerContextValue = {
     stopTimer: () => void;
     updateDuration: (newDurationSeconds: number) => void;
     updateProjectID: (newProjectID: string) => void;
+    updateSummary: (newSummary: string) => void;
 };
 
 export const TimerContext = createContext<TimerContextValue | null>(null);
@@ -58,6 +60,13 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         }));
     }
 
+    function updateSummary(newSummary: string): void {
+        setTimer((prev) => ({
+            ...prev,
+            summary: newSummary,
+        }));
+    }
+
     useEffect(() => {
         const interval = setInterval(() => {
             if (timer.running) {
@@ -77,6 +86,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         stopTimer,
         updateDuration,
         updateProjectID,
+        updateSummary,
     };
 
     return <TimerContext.Provider value={value}>{children}</TimerContext.Provider>;
