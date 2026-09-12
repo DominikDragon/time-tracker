@@ -21,7 +21,7 @@ export function SearchBar() {
                 value={search}
                 onChange={(event) => handleSearchChange(event.target.value)}
                 placeholder="search"
-                className="w-full px-3 py-2 rounded-[20px] bg-green text-cream font-normal placeholder-cream"
+                className="w-full px-3 py-1 rounded-[20px] bg-green text-cream font-normal placeholder-cream"
             />
         </div>
     );

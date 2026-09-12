@@ -17,3 +17,9 @@ body,
     font-size: 14px;
     font-family: "Intel One Mono", monospace;
 }
+
+*:focus,
+*:focus-visible {
+    outline: none;
+    box-shadow: none;
+}

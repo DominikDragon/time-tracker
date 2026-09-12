@@ -33,11 +33,11 @@ export function TrackingPage() {
                 </div>
                 {/* Content */}
                 <div className="relative z-10 flex h-full min-h-0 flex-col">
-                    <div className="grid grid-cols-[18%_18%_1fr_1fr] gap-0 font-bold">
+                    <div className="grid grid-cols-[18%_18%_1fr_1fr] gap-0 font-bold py-2">
                         <DateFilter />
                         <TimeFilter />
                         <ProjectFilter />
-                        <span className="w-full min-w-0 text-center">message</span>
+                        <span className="w-full min-w-0 text-center font-normal">message</span>
                     </div>
                     <SearchBar />
                     <div
