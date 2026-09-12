@@ -3,9 +3,7 @@ import { WebviewWindow } from "@tauri-apps/api/webviewWindow";
 const PROJECT_WINDOW_LABEL = "trackings";
 
 export async function openTrackingWindow() {
-    const existingWindow = await WebviewWindow.getByLabel(
-        PROJECT_WINDOW_LABEL
-    );
+    const existingWindow = await WebviewWindow.getByLabel(PROJECT_WINDOW_LABEL);
 
     if (existingWindow) {
         await existingWindow.setFocus();
@@ -18,6 +16,8 @@ export async function openTrackingWindow() {
         width: 600,
         height: 500,
         resizable: false,
+        decorations: false,
+        transparent: true
     });
 
     projectWindow.once("tauri://created", () => {
