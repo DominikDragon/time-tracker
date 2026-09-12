@@ -27,7 +27,7 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
     }, []);
 
     async function saveTracking(timer: Timer): Promise<void> {
-        createTracking(timer);
+        await createTracking(timer);
         const trackings = await getTrackings();
         setTrackings(trackings);
     }
