@@ -1,4 +1,4 @@
-import { ReactNode, useState, useEffect, createContext } from "react";
+import { ReactNode, useState, useEffect, useRef, createContext } from "react";
 import { getFilteredTrackings, createTracking } from "../services/database/trackingService";
 import { TrackingFilters, TrackingCursor, type Tracking } from "../types/tracking";
 import type { Timer } from "../types/timer";
@@ -19,6 +19,7 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
 
     const [cursor, setCursor] = useState<TrackingCursor | undefined>();
     const [hasMore, setHasMore] = useState(true);
+    const loadingMore = useRef(false);
 
     async function loadTrackings(
         currentFilters: TrackingFilters,
@@ -30,7 +31,7 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
         });
 
         if (currentCursor) {
-            setTrackings((prev) => [...prev, ...newTrackings]);
+            setTrackings((prev) => [...prev, ...newTrackings].slice(-200));
         } else {
             setTrackings(newTrackings);
         }
@@ -60,11 +61,17 @@ export function TrackingProvider({ children }: { children: ReactNode }) {
     }
 
     async function loadMoreTrackings(): Promise<void> {
-        if (!hasMore) {
+        if (!hasMore || !cursor || loadingMore.current) {
             return;
         }
 
-        await loadTrackings(filters, cursor);
+        loadingMore.current = true;
+
+        try {
+            await loadTrackings(filters, cursor);
+        } finally {
+            loadingMore.current = false;
+        }
     }
 
     async function saveTracking(timer: Timer): Promise<void> {
