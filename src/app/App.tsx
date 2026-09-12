@@ -5,6 +5,7 @@ import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
 import "../global.css";
 import { ProjectsPage } from "../pages/ProjectsPage";
 import { TrackingProvider } from "../context/TrackingContext";
+import { TrackingPage } from "../pages/TrackingPage";
 
 function App() {
     return (
@@ -15,8 +16,10 @@ function App() {
                         <Routes>
                             <Route path="/" element={<TimerPage />} />
                             <Route path="/projects" element={<ProjectsPage />} />
+                            <Route path="/trackings" element={<TrackingPage />} />
                         </Routes>
                         <div className="flex flex-row gap-6 mt-10">
+                            <Link to="/trackings">Trackings</Link>
                             <Link to="/projects">Projects</Link>
                             <Link to="/">Timer</Link>
                         </div>
