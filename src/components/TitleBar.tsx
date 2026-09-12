@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import { getCurrentWindow } from "@tauri-apps/api/window";
 import { closePopupWindows } from "../services/window/windows";
 import { MenuDropdown } from "./MenuDropdown";
@@ -17,6 +17,19 @@ export function TitleBar() {
 
         await appWindow.close();
     }
+
+    useEffect(() => {
+        if (!isMain) return;
+
+        const unlisten = appWindow.onCloseRequested(async () => {
+            await closePopupWindows();
+            await appWindow.close();
+        });
+
+        return () => {
+            unlisten.then((fn) => fn());
+        };
+    }, [isMain, appWindow]);
 
     return (
         <div className="bg-brown h-10 w-full px-6 text-cream flex items-center gap-1">
