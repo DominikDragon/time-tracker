@@ -1,6 +1,6 @@
-import type { Project } from "../types/project";
+import type { Project } from "../../types/project";
 import { getDatabase } from "./database";
-import { ProjectError } from "../errors/project";
+import { ProjectError } from "../../errors/project";
 
 export async function getProjects(): Promise<Project[]> {
     const db = await getDatabase();

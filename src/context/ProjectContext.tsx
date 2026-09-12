@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
-import { getProjects, createAndAddProject } from "../services/projectService";
+import { getProjects, createAndAddProject } from "../services/database/projectService";
 import type { Project } from "../types/project";
 
 // Context
