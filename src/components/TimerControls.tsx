@@ -10,19 +10,19 @@ export function TimerControls() {
         setTimeInput(formatTime(timer.durationSeconds));
     }, [timer.durationSeconds]);
 
-    function handleStartTimer(): void {
+    function handleChangeTime(input: string): void {
         const durationSeconds = parseTime(timeInput);
 
         if (durationSeconds !== null) updateDuration(durationSeconds);
 
-        startTimer();
+        setTimeInput(input);
         return;
     }
 
     return (
         <div className="flex flex-col text-black gap-6">
-            <input value={timeInput} onChange={(event) => setTimeInput(event.target.value)} />
-            <button onClick={() => handleStartTimer()}>Start</button>
+            <input value={timeInput} onChange={(event) => handleChangeTime(event.target.value)} />
+            <button onClick={() => startTimer()}>Start</button>
             <button onClick={() => stopTimer()}>Stop</button>
         </div>
     );
