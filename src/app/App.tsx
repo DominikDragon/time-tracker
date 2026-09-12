@@ -1,13 +1,11 @@
 import { ProjectProvider } from "../context/ProjectContext";
 import { TimerProvider } from "../context/TimerContext";
 import { TimerPage } from "../pages/TimerPage";
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "../global.css";
 import { ProjectsPage } from "../pages/ProjectsPage";
 import { TrackingProvider } from "../context/TrackingContext";
 import { TrackingPage } from "../pages/TrackingPage";
-import { openProjectWindow } from "../services/window/projectWindow";
-import { openTrackingWindow } from "../services/window/trackingWindow";
 import { TitleBar } from "../components/TitleBar";
 
 function App() {
@@ -16,16 +14,17 @@ function App() {
             <ProjectProvider>
                 <TimerProvider>
                     <TrackingProvider>
-                        <TitleBar />
-                        <div className="bg-cream p-2 rounded-b-[30px] overflow-hidden">
-                            <Routes>
-                                <Route path="/" element={<TimerPage />} />
-                                <Route path="/projects" element={<ProjectsPage />} />
-                                <Route path="/trackings" element={<TrackingPage />} />
-                            </Routes>
-                            <div className="flex flex-row gap-6">
-                                <button onClick={openProjectWindow}>Projects</button>
-                                <button onClick={openTrackingWindow}>Trackings</button>
+                        <div className="h-full w-full flex flex-col">
+                            <TitleBar />
+
+                            <div className="flex-1 min-h-0 bg-cream p-2 rounded-b-[30px] overflow-hidden">
+                                <Routes>
+                                    <Route path="/" element={<TimerPage />} />
+
+                                    <Route path="/projects" element={<ProjectsPage />} />
+
+                                    <Route path="/trackings" element={<TrackingPage />} />
+                                </Routes>
                             </div>
                         </div>
                     </TrackingProvider>

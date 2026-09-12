@@ -13,8 +13,8 @@ export async function openProjectWindow() {
     const projectWindow = new WebviewWindow(PROJECT_WINDOW_LABEL, {
         url: "/projects",
         title: "Projects",
-        width: 600,
-        height: 500,
+        width: 640,
+        height: 440,
         resizable: false,
         decorations: false,
         transparent: true
