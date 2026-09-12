@@ -18,7 +18,7 @@ function App() {
             <ProjectProvider>
                 <TimerProvider>
                     <TrackingProvider>
-                        <div className="h-full w-full flex flex-col rounded-[30px] overflow-hidden">
+                        <div className="h-full w-full flex flex-col rounded-[30px] overflow-hidden border-4 border-brown">
                             <TitleBar />
 
                             <div className="flex-1 min-h-0 bg-cream p-2">
