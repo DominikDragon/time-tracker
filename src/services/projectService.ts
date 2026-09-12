@@ -1,5 +1,6 @@
 import type { Project } from "../types/project";
 import { getDatabase } from "./database";
+import { ProjectError } from "../errors/project";
 
 export async function getProjects(): Promise<Project[]> {
     const db = await getDatabase();
@@ -9,7 +10,7 @@ export async function getProjects(): Promise<Project[]> {
     return projects;
 }
 
-export async function createAndAddProject(name: string): Promise<Project | void> {
+export async function createAndAddProject(name: string): Promise<Project> {
     const db = await getDatabase();
 
     const project: Project = {
@@ -22,9 +23,13 @@ export async function createAndAddProject(name: string): Promise<Project | void>
             project.id,
             project.name,
         ]);
-
-        return project;
     } catch (error) {
-        console.log(error); // TODO: handle error if name exists
+        if (String(error).includes("UNIQUE constraint failed")) {
+            throw new ProjectError("NAME_EXISTS");
+        }
+
+        throw error;
     }
+
+    return project;
 }

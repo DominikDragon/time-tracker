@@ -6,7 +6,7 @@ import type { Project } from "../types/project";
 
 type ProjectContextValue = {
     projects: Project[];
-    createProject: (name: string) => void;
+    createProject: (name: string) => Promise<void>;
 };
 
 export const ProjectContext = createContext<ProjectContextValue | null>(null);
@@ -26,11 +26,9 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     }, []);
 
     async function createProject(name: string) {
-        const project = await createAndAddProject(name);
-
-        if(!project) return;
-
-        setProjects((prev) => [...prev, project].sort((a, b) => a.name.localeCompare(b.name)));
+        await createAndAddProject(name);
+        const projects = await getProjects();
+        setProjects(projects);
     }
 
     const value: ProjectContextValue = {
