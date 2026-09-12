@@ -28,6 +28,8 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     async function createProject(name: string) {
         const project = await createAndAddProject(name);
 
+        if(!project) return;
+
         setProjects((prev) => [...prev, project].sort((a, b) => a.name.localeCompare(b.name)));
     }
 

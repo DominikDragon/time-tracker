@@ -1,7 +1,12 @@
+import { ProjectCreator } from "../components/ProjectCreator";
+import { ProjectList } from "../components/ProjectList";
+
 export function ProjectsPage(){
     return (
         <div>
-            Projects
+            <ProjectCreator/>
+
+            <ProjectList />
         </div>
     );
 }

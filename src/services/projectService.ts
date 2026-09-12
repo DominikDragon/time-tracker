@@ -9,7 +9,7 @@ export async function getProjects(): Promise<Project[]> {
     return projects;
 }
 
-export async function createAndAddProject(name: string): Promise<Project> {
+export async function createAndAddProject(name: string): Promise<Project | void> {
     const db = await getDatabase();
 
     const project: Project = {
@@ -22,9 +22,9 @@ export async function createAndAddProject(name: string): Promise<Project> {
             project.id,
             project.name,
         ]);
+
+        return project;
     } catch (error) {
         console.log(error); // TODO: handle error if name exists
     }
-
-    return project;
 }
