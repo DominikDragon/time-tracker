@@ -15,12 +15,14 @@ export function SearchBar() {
     }
 
     return (
-        <input
-            type="text"
-            value={search}
-            onChange={(event) => handleSearchChange(event.target.value)}
-            placeholder="search"
-            className="w-full px-3 py-2 rounded-[20px] bg-green text-cream font-normal placeholder-cream"
-        />
+        <div className="w-full px-2">
+            <input
+                type="text"
+                value={search}
+                onChange={(event) => handleSearchChange(event.target.value)}
+                placeholder="search"
+                className="w-full px-3 py-2 rounded-[20px] bg-green text-cream font-normal placeholder-cream"
+            />
+        </div>
     );
 }
