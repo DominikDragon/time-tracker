@@ -1,12 +1,16 @@
 import { ProjectProvider } from "../context/ProjectContext";
 import { TimerProvider } from "../context/TimerContext";
-import { TimerPage } from "../pages/TimerPage";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import "../global.css";
-import { ProjectsPage } from "../pages/ProjectsPage";
 import { TrackingProvider } from "../context/TrackingContext";
+
+import { TimerPage } from "../pages/TimerPage";
+import { ProjectsPage } from "../pages/ProjectsPage";
 import { TrackingPage } from "../pages/TrackingPage";
+
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+
 import { TitleBar } from "../components/TitleBar";
+
+import "../global.css";
 
 function App() {
     return (
@@ -14,10 +18,10 @@ function App() {
             <ProjectProvider>
                 <TimerProvider>
                     <TrackingProvider>
-                        <div className="h-full w-full flex flex-col">
+                        <div className="h-full w-full flex flex-col rounded-[30px] overflow-hidden">
                             <TitleBar />
 
-                            <div className="flex-1 min-h-0 bg-cream p-2 rounded-b-[30px] overflow-hidden">
+                            <div className="flex-1 min-h-0 bg-cream p-2">
                                 <Routes>
                                     <Route path="/" element={<TimerPage />} />
 
