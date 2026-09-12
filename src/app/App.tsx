@@ -6,6 +6,8 @@ import "../global.css";
 import { ProjectsPage } from "../pages/ProjectsPage";
 import { TrackingProvider } from "../context/TrackingContext";
 import { TrackingPage } from "../pages/TrackingPage";
+import { openProjectWindow } from "../services/window/projectWindow";
+import { openTrackingWindow } from "../services/window/trackingWindow";
 
 function App() {
     return (
@@ -19,9 +21,8 @@ function App() {
                             <Route path="/trackings" element={<TrackingPage />} />
                         </Routes>
                         <div className="flex flex-row gap-6 mt-10">
-                            <Link to="/trackings">Trackings</Link>
-                            <Link to="/projects">Projects</Link>
-                            <Link to="/">Timer</Link>
+                            <button onClick={openProjectWindow}>Projects</button>
+                            <button onClick={openTrackingWindow}>Trackings</button>
                         </div>
                     </TrackingProvider>
                 </TimerProvider>
