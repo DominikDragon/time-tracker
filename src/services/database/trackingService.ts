@@ -8,7 +8,7 @@ function mapTracking(rawTracking: TrackingRaw): Tracking {
         projectId: rawTracking.project_id,
         durationSeconds: rawTracking.duration_seconds,
         summary: rawTracking.summary,
-        createdAt: rawTracking.summary,
+        createdAt: rawTracking.created_at,
     };
 }
 
