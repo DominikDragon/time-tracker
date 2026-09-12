@@ -23,6 +23,7 @@ type TimerContextValue = {
     updateDuration: (newDurationSeconds: number) => void;
     updateProjectID: (newProjectID: string) => void;
     updateSummary: (newSummary: string) => void;
+    newTimer: () => void;
 };
 
 export const TimerContext = createContext<TimerContextValue | null>(null);
@@ -67,6 +68,10 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         }));
     }
 
+    function newTimer(): void {
+        setTimer(createNewTimer());
+    }
+
     useEffect(() => {
         const interval = setInterval(() => {
             if (timer.running) {
@@ -87,6 +92,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         updateDuration,
         updateProjectID,
         updateSummary,
+        newTimer,
     };
 
     return <TimerContext.Provider value={value}>{children}</TimerContext.Provider>;
