@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useProject } from "../hooks/useProject";
 import { useTimer } from "../hooks/useTimer";
 import type { Project } from "../types/project";
@@ -63,6 +63,10 @@ export function ProjectSelection() {
         setIsOpen(false);
     }
 
+    useEffect(() => {
+        setInputValue(selectedProject?.name ?? "");
+    }, [selectedProject]);
+
     return (
         <div className="flex flex-col gap-6 relative">
             <input
@@ -80,7 +84,10 @@ export function ProjectSelection() {
                         <button
                             className={index === highlightedIndex ? "bg-blue-500" : ""}
                             key={project.id}
-                            onClick={() => handleProjectChange(project)}
+                            onMouseDown={(event) => {
+                                event.preventDefault();
+                                handleProjectChange(project);
+                            }}
                         >
                             {project.name}
                         </button>
