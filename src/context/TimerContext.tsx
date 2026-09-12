@@ -6,6 +6,7 @@ import type { Timer } from "../types/timer";
 function createNewTimer(): Timer {
     return {
         id: crypto.randomUUID(),
+        projectId: null,
         durationSeconds: 0,
         running: false,
         active: true,
@@ -19,6 +20,7 @@ type TimerContextValue = {
     startTimer: () => void;
     stopTimer: () => void;
     updateDuration: (newDurationSeconds: number) => void;
+    updateProjectID: (newProjectID: string) => void;
 };
 
 export const TimerContext = createContext<TimerContextValue | null>(null);
@@ -42,10 +44,17 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         }));
     }
 
-    function updateDuration(newDurationSeconds: number) {
+    function updateDuration(newDurationSeconds: number): void {
         setTimer((prev) => ({
             ...prev,
             durationSeconds: newDurationSeconds,
+        }));
+    }
+
+    function updateProjectID(newProjectId: string): void {
+        setTimer((prev) => ({
+            ...prev,
+            projectId: newProjectId,
         }));
     }
 
@@ -67,6 +76,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         startTimer,
         stopTimer,
         updateDuration,
+        updateProjectID,
     };
 
     return <TimerContext.Provider value={value}>{children}</TimerContext.Provider>;
