@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import { TrackingContext } from "../context/TrackingContext";
 
-export function useTimer() {
+export function useTracking() {
     const context = useContext(TrackingContext);
 
     if (!context) {
