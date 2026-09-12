@@ -10,7 +10,7 @@ export async function getProjects(): Promise<Project[]> {
     return projects;
 }
 
-export async function createAndAddProject(name: string): Promise<Project> {
+export async function createAndAddProject(name: string): Promise<void> {
     const db = await getDatabase();
 
     const project: Project = {
@@ -30,6 +30,4 @@ export async function createAndAddProject(name: string): Promise<Project> {
 
         throw error;
     }
-
-    return project;
 }
