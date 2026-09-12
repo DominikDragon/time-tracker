@@ -12,7 +12,7 @@ function mapTracking(rawTracking: TrackingRaw): Tracking {
     };
 }
 
-async function getTrackings() {
+export async function getTrackings() {
     const db = await getDatabase();
 
     const trackingsRaw = await db.select<TrackingRaw[]>("SELECT * FROM trackings");
@@ -22,7 +22,7 @@ async function getTrackings() {
     return trackings;
 }
 
-async function createTracking(timer: Timer): Promise<void> {
+export async function createTracking(timer: Timer): Promise<void> {
     const db = await getDatabase();
 
     const dateTime: string = new Date().toISOString();
