@@ -1,17 +1,25 @@
+import { DateFilter } from "../components/filtering/DateFilter";
+import { ProjectFilter } from "../components/filtering/ProjectFilter";
+import { SearchBar } from "../components/filtering/SearchBar";
+import { TimeFilter } from "../components/filtering/TimeFilter";
+import { useProject } from "../hooks/useProject";
 import { useTracking } from "../hooks/useTracking";
 import { formatTime } from "../utils/time";
 
 export function TrackingPage() {
     const { trackings } = useTracking();
+    const { projects } = useProject();
 
     return (
         <div className="flex flex-col gap-2">
             <div className="grid grid-cols-4 gap-4 font-bold">
-                <span>Date</span>
-                <span>Time</span>
-                <span>Project</span>
-                <span>Summary</span>
+                <DateFilter/>
+                <TimeFilter/>
+                <ProjectFilter/>
+                <span>message</span>
             </div>
+
+            <SearchBar/>
 
             <div className="h-40 overflow-y-auto">
                 {trackings.map((tracking) => (
@@ -28,7 +36,7 @@ export function TrackingPage() {
                         </span>
 
                         <span>
-                            {tracking.projectId}
+                            {projects.find((project) => project.id === tracking.projectId)?.name ?? tracking.projectId}
                         </span>
 
                         <span>
