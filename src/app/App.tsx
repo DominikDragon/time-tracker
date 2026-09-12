@@ -1,4 +1,4 @@
-import { ProjectProvider } from "../context/ProductContext";
+import { ProjectProvider } from "../context/ProjectContext";
 import { TimerProvider } from "../context/TimerContext";
 import { TimerPage } from "../pages/TimerPage";
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
