@@ -10,5 +10,5 @@ export function SaveTracking() {
         newTimer();
     }
 
-    return <button onClick={handleSave}>Save Tracking</button>    
+    return <button onClick={handleSave} className="rounded-[20px] bg-light-green px-8 py-2 cursor-pointer">SAVE</button>    
 }

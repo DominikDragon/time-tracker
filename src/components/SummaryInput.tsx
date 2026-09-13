@@ -8,9 +8,12 @@ export function SummaryInput() {
     }
 
     return (
-        <input
+        <textarea
+            rows={3}
             value={timer.summary}
             onChange={(event) => handleSummaryChange(event.target.value)}
+            placeholder="details..."
+            className="border-3 border-light-green rounded-[20px] w-full px-2 py-1 placeholder-brown text-brown resize-none overflow-y-auto"
         />
     );
 }

@@ -76,13 +76,15 @@ export function ProjectSelection() {
                 onChange={(event) => handleTyping(event.target.value)}
                 onKeyDown={(event) => handleKeyDown(event.key)}
                 onBlur={handleCancel}
+                placeholder="projects..."
+                className="border-3 border-light-green rounded-[20px] w-full px-2 py-1 placeholder-brown text-brown"
             />
 
             {isOpen && (
-                <div className="absolute top-10 flex flex-col gap-2 bg-red-500">
+                <div className="absolute top-10 flex flex-col gap-0 bg-green p-0 w-full rounded-[20px] h-40 overflow-y-scroll py-4 text-cream">
                     {filteredProjects.map((project, index) => (
                         <button
-                            className={index === highlightedIndex ? "bg-blue-500" : ""}
+                            className={`${index === highlightedIndex ? "bg-light-green/40" : ""} w-full text-start p-2`}
                             key={project.id}
                             onMouseDown={(event) => {
                                 event.preventDefault();
