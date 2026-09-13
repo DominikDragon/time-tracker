@@ -56,21 +56,21 @@ export function ProjectCreator() {
     return (
         <div ref={creatorRef} className="flex flex-row w-full">
             {!creating && <div className="w-full flex justify-end">
-                <button onClick={() => setCreating(true)} className="rounded-[20px] bg-light-green px-3 py-2">add new</button>
+                <button onClick={() => setCreating(true)} className="cursor-pointer rounded-[20px] bg-light-green px-3 py-2">add new</button>
                 </div>}
 
             {creating && (
                 <div className="flex flex-col w-full">
-                    <div className="flex flex-row w-full bg-light-green/60 rounded-l-[5px] rounded-r-[20px] py-2">
+                    <div className="flex flex-row w-full bg-light-green/60 rounded-l-[5px] rounded-r-[20px] py-0">
                         <input
                             value={projectName}
                             onChange={(event) => setProjectName(event.target.value)}
                             onKeyDown={(event) => handleKey(event.key)}
                             required
                             maxLength={100}
-                            className="flex-1 min-w-0 px-2"
+                            className="flex-1 min-w-0 p-2"
                         />
-                        <button onClick={handleCreateProject} className="px-3">add new</button>
+                        <button onClick={handleCreateProject} className="cursor-pointer px-3 py-2 rounded-[20px] ring-inset ring-2 ring-light-green">add new</button>
                     </div>
                     {error && <p className="text-red-500 mx-auto">{error}</p>}
                 </div>
