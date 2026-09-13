@@ -79,7 +79,9 @@ function createTrackingWhereClause(filters: TrackingFilters): TrackingWhere {
 
     if (filters.maxDate) {
         conditions.push(`created_at < $${params.length + 1}`);
-        params.push(filters.maxDate);
+        const exclusiveMaxDate = new Date(`${filters.maxDate}T00:00:00.000Z`);
+        exclusiveMaxDate.setUTCDate(exclusiveMaxDate.getUTCDate() + 1);
+        params.push(exclusiveMaxDate.toISOString());
     }
 
     if (filters.search) {
