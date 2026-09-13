@@ -35,6 +35,7 @@ export async function createAndAddProject(name: string): Promise<void> {
 export async function deleteProject(projectId: string): Promise<void> {
     const db = await getDatabase();
 
+    await db.execute("DELETE FROM trackings WHERE project_id = $1", [projectId]);
     await db.execute("DELETE FROM projects WHERE id = $1", [projectId]);
 }
 
