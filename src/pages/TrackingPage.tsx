@@ -5,8 +5,8 @@ import { TrackingList } from "../components/TrackingList";
 
 export function TrackingPage() {
     return (
-        <div className="h-full min-h-0 px-6 py-6">
-            <div className="relative flex h-full min-h-0 flex-col gap-0 w-full min-w-0 rounded-[20px]">
+        <div className="flex h-full min-h-0 flex-col px-6 pt-6 pb-0">
+            <div className="relative flex flex-1 min-h-0 flex-col gap-0 w-full min-w-0 rounded-[20px] pb-6">
                 <div className="absolute inset-0 grid grid-cols-[18%_18%_1fr_1fr] gap-0 pointer-events-none rounded-[20px]">
                     <div className="bg-light-green/50 rounded-l-[20px]" />
                     <div className="bg-green/40" />
@@ -24,9 +24,10 @@ export function TrackingPage() {
                     </div>
                     <SearchBar />
                     <TrackingList />
-                    <DurationInfo />
                 </div>
             </div>
+
+            <DurationInfo />
         </div>
     );
 }
