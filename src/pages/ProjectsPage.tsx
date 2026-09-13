@@ -12,7 +12,7 @@ export function ProjectsPage() {
     );
 
     return (
-        <div className="flex flex-col h-full min-h-0 p-6">
+        <div className="flex flex-col h-full min-h-0 p-6 gap-4">
             <input
                 type="search"
                 value={search}
