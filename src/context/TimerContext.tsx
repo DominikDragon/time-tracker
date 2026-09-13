@@ -1,5 +1,6 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
 import type { Timer, TimerValidationErrors } from "../types/timer";
+import { MAX_DURATION_SECONDS } from "../utils/time";
 
 // Functions
 
@@ -49,7 +50,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
         clearValidationError("duration");
         setTimer((prev) => ({
             ...prev,
-            running: true,
+            running: prev.durationSeconds < MAX_DURATION_SECONDS,
         }));
     }
 
@@ -94,7 +95,8 @@ export function TimerProvider({ children }: { children: ReactNode }) {
             if (timer.running) {
                 setTimer((prev) => ({
                     ...prev,
-                    durationSeconds: prev.durationSeconds + 1,
+                    durationSeconds: Math.min(prev.durationSeconds + 1, MAX_DURATION_SECONDS),
+                    running: prev.durationSeconds + 1 < MAX_DURATION_SECONDS,
                 }));
             }
         }, 1000);

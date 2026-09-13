@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useTimer } from "../hooks/useTimer";
-import { formatTime, parseTime } from "../utils/time";
+import { formatTime, MAX_DURATION_SECONDS, parseTime } from "../utils/time";
 
 export function TimerControls() {
     const { timer, validationErrors, startTimer, stopTimer, updateDuration } = useTimer();
@@ -36,7 +36,11 @@ export function TimerControls() {
                     </button>
                 )}
                 {!timer.running && (
-                    <button onClick={() => startTimer()} className="cursor-pointer hover:rotate-360 hover:scale-105 transition-transform duration-300">
+                    <button
+                        onClick={() => startTimer()}
+                        disabled={timer.durationSeconds >= MAX_DURATION_SECONDS}
+                        className="cursor-pointer transition-transform duration-300 disabled:cursor-not-allowed disabled:opacity-50 enabled:hover:rotate-360 enabled:hover:scale-105"
+                    >
                         <img src="icons/play.svg" className="h-10 w-10"/>
                     </button>
                 )}

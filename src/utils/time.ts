@@ -1,3 +1,5 @@
+export const MAX_DURATION_SECONDS = 99 * 60 * 60 + 59 * 60 + 59;
+
 export function formatTime(durationSeconds: number): string {
     const hours = Math.floor(durationSeconds / 60 / 60);
     const minutes = Math.floor(durationSeconds / 60 - hours * 60);
@@ -13,7 +15,7 @@ function formatNumber(number: number): string {
 }
 
 export function parseTime(input: string): number | null {
-    const regex = /^\d{1,}:\d{2}:\d{2}$/;
+    const regex = /^\d{2}:\d{2}:\d{2}$/;
 
     const isValidInput = input.match(regex);
     if (!isValidInput) return null;
@@ -25,5 +27,5 @@ export function parseTime(input: string): number | null {
     const durationSeconds =
         Number(numbers[0]) * 60 * 60 + Number(numbers[1]) * 60 + Number(numbers[2]);
 
-    return durationSeconds;
+    return durationSeconds <= MAX_DURATION_SECONDS ? durationSeconds : null;
 }
