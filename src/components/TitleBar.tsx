@@ -33,8 +33,9 @@ export function TitleBar() {
 
     return (
         <div className="bg-brown h-10 w-full px-6 text-cream flex items-center gap-1">
-            <div className="flex-1 h-full flex items-center" data-tauri-drag-region>
-                tracking
+            <div className="flex-1 h-full flex items-center gap-1" data-tauri-drag-region>
+                <img src="/app-logo.png" className="h-6 w-6" />
+                toki
             </div>
 
             {isMain && <MenuDropdown />}
