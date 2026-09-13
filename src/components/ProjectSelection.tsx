@@ -112,7 +112,7 @@ export function ProjectSelection() {
                             ref={(el) => {
                                 itemRefs.current[index] = el;
                             }}
-                            className={`${index === highlightedIndex ? "bg-light-green/40" : ""} w-full text-start p-2`}
+                            className={`${index === highlightedIndex ? "bg-light-green/40" : ""} cursor-pointer w-full text-start p-2`}
                             key={project.id}
                             onMouseEnter={() => setHighlightedIndex(index)}
                             onMouseDown={(event) => {
