@@ -46,14 +46,14 @@ export function MenuDropdown() {
                 <div className="absolute top-full left-1/2 -translate-x-1/2 z-20 rounded-[5px] border-2 border-brown bg-cream">
                     <button
                         onClick={handleOpenProjects}
-                        className="cursor-pointer text-brown uppercase w-full text-left px-3 py-2 border-b-2 border-brown"
+                        className="cursor-pointer text-brown hover:bg-light-green transition-colors duration-300 uppercase w-full text-left px-3 py-2 border-b-2 border-brown"
                     >
                         Projects
                     </button>
 
                     <button
                         onClick={handleOpenTrackings}
-                        className="cursor-pointer text-brown uppercase w-full text-left px-3 py-2"
+                        className="cursor-pointer text-brown hover:bg-light-green transition-colors duration-300 uppercase w-full text-left px-3 py-2"
                     >
                         Trackings
                     </button>

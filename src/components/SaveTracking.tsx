@@ -27,7 +27,7 @@ export function SaveTracking() {
             {timer.durationSeconds >= MAX_DURATION_SECONDS && (
                 <span className="mr-auto text-green">Please go touch some grass!</span>
             )}
-            <button onClick={handleSave} className="rounded-[20px] bg-light-green px-8 py-2 cursor-pointer">SAVE</button>
+            <button onClick={handleSave} className="rounded-[20px] bg-light-green px-8 py-2 cursor-pointer hover:bg-middle-green transition-colors duration-200 active:scale-95">SAVE</button>
         </div>
     );
 }

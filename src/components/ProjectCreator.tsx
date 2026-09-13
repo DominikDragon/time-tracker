@@ -59,7 +59,7 @@ export function ProjectCreator() {
                 <div className="w-full flex justify-end">
                     <button
                         onClick={() => setCreating(true)}
-                        className="cursor-pointer rounded-[20px] bg-light-green px-3 py-2"
+                        className="cursor-pointer rounded-[20px] bg-light-green px-3 py-2 hover:bg-middle-green transition-colors duration-200 active:scale-95"
                     >
                         add new
                     </button>
@@ -79,7 +79,7 @@ export function ProjectCreator() {
                         />
                         <button
                             onClick={handleCreateProject}
-                            className="cursor-pointer px-3 py-2 rounded-[20px] ring-inset ring-2 ring-light-green"
+                            className="cursor-pointer rounded-[20px] px-3 py-2 ring-2 ring-inset ring-light-green focus:!ring-2 focus:!ring-light-green hover:bg-light-green transition-colors duration-200 active:scale-95"
                         >
                             add new
                         </button>

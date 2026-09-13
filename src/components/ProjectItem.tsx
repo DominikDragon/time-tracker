@@ -16,7 +16,7 @@ export function ProjectItem({ project }: ProjectItemProps) {
         <>
             <div
                 key={project.id}
-                className="bg-light-green/40 rounded-[5px] flex flex-row justify-between items-center px-2 text-custom-lg"
+                className="bg-light-green/60 rounded-[5px] flex flex-row justify-between items-center px-2 text-custom-lg"
             >
                 <p>{cutText(project.name, 30)}</p>
                 <div className="flex flex-row gap-2">
