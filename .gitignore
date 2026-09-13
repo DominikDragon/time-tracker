@@ -1,0 +1,53 @@
+```gitignore
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Vite
+.vite/
+
+# Tauri
+src-tauri/target/
+
+# Rust
+Cargo.lock
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE / editors
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+
+.idea/
+
+# Temporary files
+*.tmp
+*.temp
+
+# Rust tooling
+**/*.rs.bk
+
+# Tauri generated files
+src-tauri/gen/
+
+# Local development
+*.local
+```

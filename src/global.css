@@ -1,0 +1,39 @@
+@import '@fontsource-variable/intel-one-mono/wght.css';
+@import "tailwindcss";
+
+@theme {
+    --color-brown: #392b0e;
+    --color-cream: #E9E5D6;
+    --color-green: #464E2E;
+    --color-middle-green: #969B7E;
+    --color-light-green: #ACB992;
+
+    --text-custom-sm: 12px;
+    --text-custom-lg: 16px;
+    --text-custom-2xl: 22px;
+}
+
+html,
+body,
+#root {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    background: transparent;
+    font-size: 14px;
+    font-family: 'Intel One Mono Variable', monospace;
+    font-weight: 400;
+    color: var(--color-brown);
+}
+
+*:focus,
+*:focus-visible {
+    outline: none;
+    box-shadow: none;
+}
+
+.spiral-strip {
+    background-image: url("/icons/spiral.svg");
+    background-repeat: space no-repeat;
+    background-position: center;
+}
