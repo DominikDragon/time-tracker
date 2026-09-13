@@ -43,7 +43,7 @@ export function DeleteProjectModal({ project, onClose }: DeleteProjectModalProps
 
                 {error && (
                     <div className="mt-2 rounded-[10px] bg-red-100 px-3 py-2">
-                        <p className="text-sm text-red-700">{error}</p>
+                        <p className="text-custom-sm text-red-700">{error}</p>
                     </div>
                 )}
 

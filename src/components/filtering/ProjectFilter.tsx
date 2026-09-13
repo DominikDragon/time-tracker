@@ -131,7 +131,7 @@ export function ProjectFilter() {
                         ))}
 
                         {filteredProjects.length === 0 && (
-                            <div className="px-2 py-1 text-sm">No projects found</div>
+                            <div className="px-2 py-1">No projects found</div>
                         )}
                     </div>
                 )}
