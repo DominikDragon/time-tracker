@@ -31,3 +31,15 @@ export async function createAndAddProject(name: string): Promise<void> {
         throw error;
     }
 }
+
+export async function deleteProject(projectId: string): Promise<void> {
+    const db = await getDatabase();
+
+    await db.execute("DELETE FROM projects WHERE id = $1", [projectId]);
+}
+
+export async function renameProject(projectId: string, newName: string): Promise<void> {
+    const db = await getDatabase();
+
+    await db.execute("UPDATE projects SET name = $1 WHERE id = $2", [newName, projectId]);
+}

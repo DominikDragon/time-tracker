@@ -1,5 +1,10 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
-import { getProjects, createAndAddProject } from "../services/database/projectService";
+import {
+    getProjects,
+    createAndAddProject,
+    deleteProject,
+    renameProject,
+} from "../services/database/projectService";
 import type { Project } from "../types/project";
 
 // Context
@@ -7,6 +12,8 @@ import type { Project } from "../types/project";
 type ProjectContextValue = {
     projects: Project[];
     createProject: (name: string) => Promise<void>;
+    deleteProject: (projectId: string) => Promise<void>;
+    renameProject: (projectId: string, newName: string) => Promise<void>;
 };
 
 export const ProjectContext = createContext<ProjectContextValue | null>(null);
@@ -31,9 +38,23 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
         setProjects(projects);
     }
 
+    async function deleteProject(projectId: string) {
+        await deleteProject(projectId);
+        const projects = await getProjects();
+        setProjects(projects);
+    }
+
+    async function renameProject(projectId: string, newName: string){
+        await renameProject(projectId, newName);
+        const projects = await getProjects();
+        setProjects(projects);
+    }
+
     const value: ProjectContextValue = {
         projects,
         createProject,
+        deleteProject,
+        renameProject,
     };
 
     return <ProjectContext.Provider value={value}>{children}</ProjectContext.Provider>;
