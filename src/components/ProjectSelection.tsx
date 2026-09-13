@@ -82,16 +82,24 @@ export function ProjectSelection() {
 
     return (
         <div className="flex flex-col gap-6 relative">
-            <input
-                ref={inputRef}
-                value={inputValue}
-                onFocus={() => setIsOpen(true)}
-                onChange={(event) => handleTyping(event.target.value)}
-                onKeyDown={(event) => handleKeyDown(event.key)}
-                onBlur={handleCancel}
-                placeholder="projects..."
-                className="border-3 border-light-green rounded-[20px] w-full px-2 py-1 placeholder-brown text-brown"
-            />
+            <div className="relative">
+                <input
+                    ref={inputRef}
+                    value={inputValue}
+                    onFocus={() => setIsOpen(true)}
+                    onChange={(event) => handleTyping(event.target.value)}
+                    onKeyDown={(event) => handleKeyDown(event.key)}
+                    onBlur={handleCancel}
+                    placeholder="projects..."
+                    className="w-full rounded-[20px] border-3 border-light-green py-1 pl-2 pr-10 text-brown placeholder-brown"
+                />
+                <img
+                    src="/icons/search-dark.svg"
+                    alt=""
+                    aria-hidden="true"
+                    className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2"
+                />
+            </div>
 
             {isOpen && (
                 <div className="absolute top-10 flex flex-col gap-0 bg-green p-0 w-full rounded-[20px] max-h-40 overflow-y-scroll text-cream">

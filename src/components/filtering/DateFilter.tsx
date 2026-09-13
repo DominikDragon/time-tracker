@@ -5,7 +5,7 @@ export function DateFilter() {
     const { filters, setFilters } = useTracking();
 
     return (
-        <FilterDropdown label="date">
+        <FilterDropdown icon="calendar" label="date">
             <div>
                 <label>
                     Min date

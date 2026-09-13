@@ -47,7 +47,7 @@ export function TimeFilter() {
     }
 
     return (
-        <FilterDropdown label="time">
+        <FilterDropdown icon="clock" label="time">
             <div className="flex flex-row gap-1">
                 <input
                     value={minInput}

@@ -94,17 +94,25 @@ export function ProjectFilter() {
     };
 
     return (
-        <FilterDropdown label="project">
+        <FilterDropdown icon="clipboard" label="project">
             <div className="w-50">
-                <input
-                    type="text"
-                    value={search}
-                    onChange={(event) => handleSearchChange(event.target.value)}
-                    onKeyDown={handleKeyDown}
-                    placeholder="search"
-                    autoFocus
-                    className="w-full px-3 py-1 border-2 border-brown rounded-[20px] bg-brown/35 text-brown font-normal placeholder-brown"
-                />
+                <div className="relative">
+                    <input
+                        type="text"
+                        value={search}
+                        onChange={(event) => handleSearchChange(event.target.value)}
+                        onKeyDown={handleKeyDown}
+                        placeholder="search"
+                        autoFocus
+                        className="w-full rounded-[20px] border-2 border-brown bg-brown/35 py-1 pl-3 pr-10 text-brown font-normal placeholder-brown"
+                    />
+                    <img
+                        src="/icons/search-dark.svg"
+                        alt=""
+                        aria-hidden="true"
+                        className="pointer-events-none absolute right-3 top-1/2 h-4 w-4 -translate-y-1/2"
+                    />
+                </div>
 
                 {showProjects && (
                     <div className="max-h-[120px] mt-2 overflow-y-auto">

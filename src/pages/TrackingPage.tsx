@@ -18,7 +18,10 @@ export function TrackingPage() {
                         aria-hidden="true"
                         className="spiral-strip pointer-events-none absolute inset-x-6 top-[-12.5px] h-[25px]"
                     />
-                    <FilterRow />
+                    <div className="w-full h-fit">
+                        <FilterRow />
+                        <div className="mx-4 mb-4 h-1 border-b-3 border-dashed border-green" />
+                    </div>
                     <SearchBar />
                     <TrackingList />
                     <DurationInfo />
