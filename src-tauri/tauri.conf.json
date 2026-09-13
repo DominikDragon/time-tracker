@@ -12,7 +12,7 @@
   "app": {
     "windows": [
       {
-        "title": "time-tracker",
+        "title": "Toki",
         "width": 500,
         "height": 300,
         "decorations": false,
