@@ -1,4 +1,5 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
+import { emit, listen } from "@tauri-apps/api/event";
 import {
     getProjects,
     createAndAddProject as createProjectInDatabase,
@@ -6,6 +7,8 @@ import {
     renameProject as renameProjectInDatabase,
 } from "../services/database/projectService";
 import type { Project } from "../types/project";
+
+const PROJECTS_CHANGED_EVENT = "projects-changed";
 
 // Context
 
@@ -23,31 +26,49 @@ export const ProjectContext = createContext<ProjectContextValue | null>(null);
 export function ProjectProvider({ children }: { children: ReactNode }) {
     const [projects, setProjects] = useState<Project[]>([]);
 
-    useEffect(() => {
-        async function loadProjects() {
-            const projects = await getProjects();
-            setProjects(projects);
-        }
+    async function loadProjects() {
+        const projects = await getProjects();
+        setProjects(projects);
+    }
 
-        loadProjects();
+    useEffect(() => {
+        void loadProjects();
+
+        let isCancelled = false;
+        let unlisten: (() => void) | undefined;
+
+        void listen(PROJECTS_CHANGED_EVENT, () => {
+            void loadProjects();
+        }).then((removeListener) => {
+            if (isCancelled) {
+                removeListener();
+            } else {
+                unlisten = removeListener;
+            }
+        });
+
+        return () => {
+            isCancelled = true;
+            unlisten?.();
+        };
     }, []);
 
     async function createProject(name: string) {
         await createProjectInDatabase(name);
-        const projects = await getProjects();
-        setProjects(projects);
+        await loadProjects();
+        await emit(PROJECTS_CHANGED_EVENT);
     }
 
     async function deleteProject(projectId: string) {
         await deleteProjectFromDatabase(projectId);
-        const projects = await getProjects();
-        setProjects(projects);
+        await loadProjects();
+        await emit(PROJECTS_CHANGED_EVENT);
     }
 
     async function renameProject(projectId: string, newName: string){
         await renameProjectInDatabase(projectId, newName);
-        const projects = await getProjects();
-        setProjects(projects);
+        await loadProjects();
+        await emit(PROJECTS_CHANGED_EVENT);
     }
 
     const value: ProjectContextValue = {
