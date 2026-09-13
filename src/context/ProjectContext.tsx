@@ -1,9 +1,9 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
 import {
     getProjects,
-    createAndAddProject,
-    deleteProject,
-    renameProject,
+    createAndAddProject as createProjectInDatabase,
+    deleteProject as deleteProjectFromDatabase,
+    renameProject as renameProjectInDatabase,
 } from "../services/database/projectService";
 import type { Project } from "../types/project";
 
@@ -33,19 +33,19 @@ export function ProjectProvider({ children }: { children: ReactNode }) {
     }, []);
 
     async function createProject(name: string) {
-        await createAndAddProject(name);
+        await createProjectInDatabase(name);
         const projects = await getProjects();
         setProjects(projects);
     }
 
     async function deleteProject(projectId: string) {
-        await deleteProject(projectId);
+        await deleteProjectFromDatabase(projectId);
         const projects = await getProjects();
         setProjects(projects);
     }
 
     async function renameProject(projectId: string, newName: string){
-        await renameProject(projectId, newName);
+        await renameProjectInDatabase(projectId, newName);
         const projects = await getProjects();
         setProjects(projects);
     }

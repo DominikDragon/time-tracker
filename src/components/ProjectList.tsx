@@ -1,4 +1,5 @@
 import type { Project } from "../types/project";
+import { ProjectItem } from "./ProjectItem";
 
 type ProjectListProps = {
     projects: Project[];
@@ -13,12 +14,7 @@ export function ProjectList({ projects }: ProjectListProps) {
                 </div>
             ) : (
                 projects.map((project) => (
-                    <div
-                        key={project.id}
-                        className="bg-light-green/60 rounded-[5px] flex flex-row justify-between items-center px-2 text-custom-lg"
-                    >
-                        {project.name}
-                    </div>
+                    <ProjectItem project={project}/>
                 ))
             )}
         </div>

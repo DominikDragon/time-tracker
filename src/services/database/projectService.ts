@@ -41,5 +41,13 @@ export async function deleteProject(projectId: string): Promise<void> {
 export async function renameProject(projectId: string, newName: string): Promise<void> {
     const db = await getDatabase();
 
-    await db.execute("UPDATE projects SET name = $1 WHERE id = $2", [newName, projectId]);
+    try {
+        await db.execute("UPDATE projects SET name = $1 WHERE id = $2", [newName, projectId]);
+    } catch (error) {
+        if (String(error).includes("UNIQUE constraint failed")) {
+            throw new ProjectError("NAME_EXISTS");
+        }
+
+        throw error;
+    }
 }
