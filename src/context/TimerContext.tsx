@@ -1,6 +1,7 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
 import type { Timer, TimerValidationErrors } from "../types/timer";
 import { MAX_DURATION_SECONDS } from "../utils/time";
+import { saveToLocalStorage, loadFromLocalStorage } from "../services/storage/localStorage";
 
 // Functions
 
@@ -13,6 +14,14 @@ function createNewTimer(): Timer {
         running: false,
         active: true,
     };
+}
+
+function initOnLaunch(): Timer {
+    const loadedTimer = loadFromLocalStorage();
+
+    if (!loadedTimer) return createNewTimer();
+
+    return loadedTimer;
 }
 
 // Context
@@ -35,7 +44,7 @@ export const TimerContext = createContext<TimerContextValue | null>(null);
 // Provider
 
 export function TimerProvider({ children }: { children: ReactNode }) {
-    const [timer, setTimer] = useState<Timer>(() => createNewTimer());
+    const [timer, setTimer] = useState<Timer>(() => initOnLaunch());
     const [validationErrors, setValidationErrorsState] = useState<TimerValidationErrors>({
         duration: false,
         project: false,
@@ -103,6 +112,13 @@ export function TimerProvider({ children }: { children: ReactNode }) {
 
         return () => clearInterval(interval);
     }, [timer.running]);
+
+    useEffect(() => {
+        saveToLocalStorage({
+            ...timer,
+            running: false,
+        });
+    }, [timer]);
 
     const value: TimerContextValue = {
         timer,
