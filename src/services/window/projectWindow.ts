@@ -17,7 +17,8 @@ export async function openProjectWindow() {
         height: 440,
         resizable: false,
         decorations: false,
-        transparent: true
+        transparent: true,
+        zoomHotkeysEnabled: false
     });
 
     projectWindow.once("tauri://created", () => {

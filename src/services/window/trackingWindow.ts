@@ -17,7 +17,8 @@ export async function openTrackingWindow() {
         height: 440,
         resizable: false,
         decorations: false,
-        transparent: true
+        transparent: true,
+        zoomHotkeysEnabled: false
     });
 
     trackingWindow.once("tauri://created", () => {
