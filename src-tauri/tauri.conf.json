@@ -1,6 +1,6 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "time-tracker",
+  "productName": "Toki",
   "version": "0.1.0",
   "identifier": "com.dragon-dominik.time-tracker",
   "build": {
