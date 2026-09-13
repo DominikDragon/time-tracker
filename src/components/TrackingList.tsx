@@ -17,7 +17,7 @@ export function TrackingList() {
 
     return (
         <div
-            className="min-h-0 flex-1 overflow-y-auto overflow-x-hidden mt-8"
+            className="min-h-0 flex-1 flex flex-col gap-4 overflow-y-auto overflow-x-hidden mt-8"
             onScroll={handleTrackingScroll}
         >
             {trackings.map((tracking: Tracking) => (

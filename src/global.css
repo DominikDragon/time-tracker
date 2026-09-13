@@ -1,3 +1,4 @@
+@import '@fontsource-variable/intel-one-mono/wght.css';
 @import "tailwindcss";
 
 @theme {
@@ -15,7 +16,8 @@ body,
     margin: 0;
     background: transparent;
     font-size: 14px;
-    font-family: "Intel One Mono", monospace;
+    font-family: 'Intel One Mono Variable', monospace;
+    font-weight: 400;
 }
 
 *:focus,
