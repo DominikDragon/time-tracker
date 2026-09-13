@@ -2,6 +2,7 @@ import { Tracking } from "../types/tracking";
 import { formatTime } from "../utils/time";
 import { useProject } from "../hooks/useProject";
 import { cutText } from "../utils/tracking";
+import { SummaryDropdown } from "./SummaryDropdown";
 
 type TrackingItemProps = {
     trackingData: Tracking;
@@ -26,7 +27,7 @@ export function TrackingItem({ trackingData }: TrackingItemProps) {
                 {cutText(getProjectName(trackingData.projectId), 40)}
             </span>
             <span className="w-full min-w-0 text-left px-2">
-                {cutText(trackingData.summary, 14)}
+                <SummaryDropdown summary={trackingData.summary} />
             </span>
         </div>
     );
