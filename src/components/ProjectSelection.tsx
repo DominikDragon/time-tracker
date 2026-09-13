@@ -92,7 +92,7 @@ export function ProjectSelection() {
                     onKeyDown={(event) => handleKeyDown(event.key)}
                     onBlur={handleCancel}
                     placeholder="projects..."
-                    className={`w-full rounded-[20px] border-3 py-1 pl-2 pr-10 text-brown placeholder-brown ${validationErrors.project ? "border-red-600" : "border-light-green"}`}
+                    className={`w-full rounded-[20px] border-3 py-1 pl-2 pr-10 text-brown placeholder-brown bg-cream ${validationErrors.project ? "border-red-600" : "border-light-green"}`}
                 />
                 <img
                     src="/icons/search-dark.svg"

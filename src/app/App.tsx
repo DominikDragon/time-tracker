@@ -21,14 +21,16 @@ function App() {
                         <div className="h-full w-full flex flex-col rounded-[30px] overflow-hidden border-4 border-brown">
                             <TitleBar />
 
-                            <div className="flex-1 min-h-0 bg-cream p-2">
-                                <Routes>
-                                    <Route path="/" element={<TimerPage />} />
+                            <div className="relative flex flex-1 min-h-0 flex-col bg-cream">
+                                <img src="/icons/background-art.svg" className="absolute z-0 w-[120vw] h-screen object-cover object-top-left opacity-20"/>
 
-                                    <Route path="/projects" element={<ProjectsPage />} />
-
-                                    <Route path="/trackings" element={<TrackingPage />} />
-                                </Routes>
+                                <div className="relative z-10 p-2 flex-1 min-h-0">
+                                    <Routes>
+                                        <Route path="/" element={<TimerPage />} />
+                                        <Route path="/projects" element={<ProjectsPage />} />
+                                        <Route path="/trackings" element={<TrackingPage />} />
+                                    </Routes>
+                                </div>
                             </div>
                         </div>
                     </TrackingProvider>

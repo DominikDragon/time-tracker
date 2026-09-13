@@ -67,7 +67,7 @@ export function ProjectCreator() {
             )}
 
             {creating && (
-                <div className="flex flex-col w-full">
+                <div className="flex flex-col w-full bg-cream rounded-l-[5px] rounded-r-[20px]">
                     <div className="flex flex-row w-full bg-light-green/60 rounded-l-[5px] rounded-r-[20px] py-0">
                         <input
                             value={projectName}
