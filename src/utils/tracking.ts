@@ -3,5 +3,5 @@ export function cutText(text: string, characterLimit: number): string {
         return text;
     }
 
-    return text.slice(0, characterLimit) + "...";
+    return text.slice(0, characterLimit).trimEnd() + "...";
 }
