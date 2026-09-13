@@ -1,5 +1,5 @@
 import { ReactNode, useState, useEffect, createContext } from "react";
-import type { Timer } from "../types/timer";
+import type { Timer, TimerValidationErrors } from "../types/timer";
 
 // Functions
 
@@ -18,11 +18,14 @@ function createNewTimer(): Timer {
 
 type TimerContextValue = {
     timer: Timer;
+    validationErrors: TimerValidationErrors;
     startTimer: () => void;
     stopTimer: () => void;
     updateDuration: (newDurationSeconds: number) => void;
     updateProjectID: (newProjectID: string) => void;
     updateSummary: (newSummary: string) => void;
+    setValidationErrors: (errors: TimerValidationErrors) => void;
+    clearValidationError: (field: keyof TimerValidationErrors) => void;
     newTimer: () => void;
 };
 
@@ -32,8 +35,18 @@ export const TimerContext = createContext<TimerContextValue | null>(null);
 
 export function TimerProvider({ children }: { children: ReactNode }) {
     const [timer, setTimer] = useState<Timer>(() => createNewTimer());
+    const [validationErrors, setValidationErrorsState] = useState<TimerValidationErrors>({
+        duration: false,
+        project: false,
+        summary: false,
+    });
+
+    function clearValidationError(field: keyof TimerValidationErrors): void {
+        setValidationErrorsState((prev) => ({ ...prev, [field]: false }));
+    }
 
     function startTimer(): void {
+        clearValidationError("duration");
         setTimer((prev) => ({
             ...prev,
             running: true,
@@ -48,6 +61,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
     }
 
     function updateDuration(newDurationSeconds: number): void {
+        clearValidationError("duration");
         setTimer((prev) => ({
             ...prev,
             durationSeconds: newDurationSeconds,
@@ -55,6 +69,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
     }
 
     function updateProjectID(newProjectId: string): void {
+        clearValidationError("project");
         setTimer((prev) => ({
             ...prev,
             projectId: newProjectId,
@@ -62,6 +77,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
     }
 
     function updateSummary(newSummary: string): void {
+        clearValidationError("summary");
         setTimer((prev) => ({
             ...prev,
             summary: newSummary,
@@ -70,6 +86,7 @@ export function TimerProvider({ children }: { children: ReactNode }) {
 
     function newTimer(): void {
         setTimer(createNewTimer());
+        setValidationErrorsState({ duration: false, project: false, summary: false });
     }
 
     useEffect(() => {
@@ -87,11 +104,14 @@ export function TimerProvider({ children }: { children: ReactNode }) {
 
     const value: TimerContextValue = {
         timer,
+        validationErrors,
         startTimer,
         stopTimer,
         updateDuration,
         updateProjectID,
         updateSummary,
+        setValidationErrors: setValidationErrorsState,
+        clearValidationError,
         newTimer,
     };
 

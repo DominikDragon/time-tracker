@@ -6,7 +6,7 @@ import { cutText } from "../utils/tracking";
 
 export function ProjectSelection() {
     const { projects } = useProject();
-    const { timer, updateProjectID } = useTimer();
+    const { timer, validationErrors, updateProjectID, clearValidationError } = useTimer();
 
     const selectedProject = projects.find((project) => project.id === timer.projectId);
 
@@ -30,6 +30,7 @@ export function ProjectSelection() {
     }
 
     function handleTyping(input: string): void {
+        clearValidationError("project");
         setInputValue(input);
         setHighlightedIndex(0);
         setIsOpen(true);
@@ -91,7 +92,7 @@ export function ProjectSelection() {
                     onKeyDown={(event) => handleKeyDown(event.key)}
                     onBlur={handleCancel}
                     placeholder="projects..."
-                    className="w-full rounded-[20px] border-3 border-light-green py-1 pl-2 pr-10 text-brown placeholder-brown"
+                    className={`w-full rounded-[20px] border-3 py-1 pl-2 pr-10 text-brown placeholder-brown ${validationErrors.project ? "border-red-600" : "border-light-green"}`}
                 />
                 <img
                     src="/icons/search-dark.svg"

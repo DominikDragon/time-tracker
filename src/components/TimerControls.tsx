@@ -3,7 +3,7 @@ import { useTimer } from "../hooks/useTimer";
 import { formatTime, parseTime } from "../utils/time";
 
 export function TimerControls() {
-    const { timer, startTimer, stopTimer, updateDuration } = useTimer();
+    const { timer, validationErrors, startTimer, stopTimer, updateDuration } = useTimer();
     const [timeInput, setTimeInput] = useState<string>(formatTime(timer.durationSeconds));
 
     useEffect(() => {
@@ -24,7 +24,7 @@ export function TimerControls() {
             <input
                 value={timeInput}
                 onChange={(event) => handleChangeTime(event.target.value)}
-                className="w-full text-center text-2xl"
+                className={`w-full text-center text-2xl ${validationErrors.duration ? "text-red-600" : "text-cream"}`}
             />
 
             <span className="w-full h-1 rounded-full bg-cream"></span>

@@ -6,3 +6,9 @@ export type Timer = {
     running: boolean,
     active: boolean,
 }
+
+export type TimerValidationErrors = {
+    duration: boolean;
+    project: boolean;
+    summary: boolean;
+};
