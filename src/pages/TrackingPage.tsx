@@ -1,3 +1,4 @@
+import { DurationInfo } from "../components/DurationInfo";
 import { FilterRow } from "../components/filtering/FilterRow";
 import { SearchBar } from "../components/filtering/SearchBar";
 import { TrackingList } from "../components/TrackingList";
@@ -20,6 +21,7 @@ export function TrackingPage() {
                     <FilterRow />
                     <SearchBar />
                     <TrackingList />
+                    <DurationInfo />
                 </div>
             </div>
         </div>

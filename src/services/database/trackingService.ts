@@ -1,5 +1,11 @@
 import { getDatabase } from "./database";
-import type { Tracking, TrackingRaw, TrackingFilters, TrackingPagination, TrackingCursor } from "../../types/tracking";
+import type {
+    Tracking,
+    TrackingRaw,
+    TrackingFilters,
+    TrackingPagination,
+    TrackingCursor,
+} from "../../types/tracking";
 import type { Timer } from "../../types/timer";
 
 function mapTracking(rawTracking: TrackingRaw): Tracking {
@@ -37,13 +43,36 @@ export async function createTracking(timer: Timer): Promise<void> {
     }
 }
 
-export async function getFilteredTrackings(filters: TrackingFilters, pagination: TrackingPagination): Promise<Tracking[]>{
-    const db = await getDatabase();
+export async function getFilteredTrackings(
+    filters: TrackingFilters,
+    pagination: TrackingPagination,
+): Promise<{
+    trackings: Tracking[];
+    totalDurationSeconds: number;
+}> {
+    const where = createTrackingWhereClause(filters);
 
+    const [trackings, totalDurationSeconds] = await Promise.all([
+        queryTrackings(where, pagination),
+        queryTotalDuration(where),
+    ]);
+
+    return {
+        trackings,
+        totalDurationSeconds,
+    };
+}
+
+type TrackingWhere = {
+    clause: string;
+    params: unknown[];
+};
+
+function createTrackingWhereClause(filters: TrackingFilters): TrackingWhere {
     const conditions: string[] = [];
     const params: unknown[] = [];
 
-      if (filters.minDate) {
+    if (filters.minDate) {
         conditions.push(`created_at >= $${params.length + 1}`);
         params.push(filters.minDate);
     }
@@ -73,6 +102,22 @@ export async function getFilteredTrackings(filters: TrackingFilters, pagination:
         params.push(filters.maxDurationSeconds);
     }
 
+    return {
+        clause: conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "",
+        params,
+    };
+}
+
+async function queryTrackings(
+    where: TrackingWhere,
+    pagination: TrackingPagination,
+): Promise<Tracking[]> {
+    const db = await getDatabase();
+
+    const conditions = where.clause ? [where.clause.replace("WHERE ", "")] : [];
+
+    const params = [...where.params];
+
     if (pagination.cursor) {
         const createdAtParam = params.length + 1;
         const idParam = params.length + 2;
@@ -87,16 +132,10 @@ export async function getFilteredTrackings(filters: TrackingFilters, pagination:
             )
         `);
 
-        params.push(
-            pagination.cursor.createdAt,
-            pagination.cursor.id,
-        );
+        params.push(pagination.cursor.createdAt, pagination.cursor.id);
     }
 
-    const whereClause =
-        conditions.length > 0
-            ? `WHERE ${conditions.join(" AND ")}`
-            : "";
+    const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(" AND ")}` : "";
 
     const limitParam = params.length + 1;
     params.push(pagination.limit);
@@ -114,10 +153,22 @@ export async function getFilteredTrackings(filters: TrackingFilters, pagination:
         LIMIT $${limitParam}
     `;
 
-    const rawTrackings = await db.select<TrackingRaw[]>(
-        query,
-        params,
-    );
+    const rawTrackings = await db.select<TrackingRaw[]>(query, params);
 
     return rawTrackings.map(mapTracking);
+}
+
+async function queryTotalDuration(where: TrackingWhere): Promise<number> {
+    const db = await getDatabase();
+
+    const result = await db.select<{ total_duration: number }[]>(
+        `
+            SELECT COALESCE(SUM(duration_seconds), 0) AS total_duration
+            FROM trackings
+            ${where.clause}
+        `,
+        where.params,
+    );
+
+    return Number(result[0]?.total_duration ?? 0);
 }

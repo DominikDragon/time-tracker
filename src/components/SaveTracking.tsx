@@ -5,8 +5,8 @@ export function SaveTracking() {
     const { timer, newTimer } = useTimer();
     const { saveTracking } = useTracking();
 
-    function handleSave(): void {
-        saveTracking(timer);
+    async function handleSave(): Promise<void> {
+        await saveTracking(timer);
         newTimer();
     }
 
