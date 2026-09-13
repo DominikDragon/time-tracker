@@ -1,23 +1,42 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useProject } from "../hooks/useProject";
 import { ProjectError } from "../errors/project";
 
 export function ProjectCreator() {
     const { createProject } = useProject();
+    const creatorRef = useRef<HTMLDivElement>(null);
 
     const [projectName, setProjectName] = useState<string>("");
     const [error, setError] = useState<string | null>(null);
 
     const [creating, setCreating] = useState<boolean>(false);
 
+    useEffect(() => {
+        if (!creating) return;
+
+        function handleOutsideInteraction(event: MouseEvent): void {
+            if (creatorRef.current && !creatorRef.current.contains(event.target as Node)) {
+                setCreating(false);
+                setProjectName("");
+                setError(null);
+            }
+        }
+
+        document.addEventListener("mousedown", handleOutsideInteraction);
+
+        return () => {
+            document.removeEventListener("mousedown", handleOutsideInteraction);
+        };
+    }, [creating]);
+
     async function handleCreateProject(): Promise<void> {
-        if(projectName.length < 5){
+        if(projectName.trim().length < 5){
             setError("A project name must be a minimum of 5 characters long.");
             return;
         }
 
         try {
-            await createProject(projectName);
+            await createProject(projectName.trim());
             setProjectName("");
             setError(null);
         } catch (error) {
@@ -35,7 +54,7 @@ export function ProjectCreator() {
     }
 
     return (
-        <div className="flex flex-row w-full">
+        <div ref={creatorRef} className="flex flex-row w-full">
             {!creating && <div className="w-full flex justify-end">
                 <button onClick={() => setCreating(true)} className="rounded-[20px] bg-light-green px-3 py-2">add new</button>
                 </div>}

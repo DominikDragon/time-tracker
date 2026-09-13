@@ -14,13 +14,13 @@ export function EditProjectModal({ project, onClose }: EditProjectModalProps) {
     const [error, setError] = useState<string | null>(null);
 
      async function handleRenameProject(): Promise<void> {
-            if(projectName.length < 5){
+            if(projectName.trim().length < 5){
                 setError("A project name must be a minimum of 5 characters long.");
                 return;
             }
     
             try {
-                await renameProject(project.id ,projectName);
+                await renameProject(project.id ,projectName.trim());
                 setProjectName("");
                 setError(null);
                 onClose();
