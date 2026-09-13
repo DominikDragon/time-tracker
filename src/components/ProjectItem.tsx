@@ -16,15 +16,15 @@ export function ProjectItem({ project }: ProjectItemProps) {
         <>
             <div
                 key={project.id}
-                className="bg-light-green/60 rounded-[5px] flex flex-row justify-between items-center px-2 text-custom-lg"
+                className="bg-light-green/40 rounded-[5px] flex flex-row justify-between items-center px-2 text-custom-lg"
             >
-                <p>{cutText(project.name,30)}</p>
+                <p>{cutText(project.name, 30)}</p>
                 <div className="flex flex-row gap-2">
                     <button onClick={() => setIsEditOpen(true)} className="cursor-pointer">
-                        Rename
+                        <img src="/icons/edit.svg" className="h-4.5 w-4.5" />
                     </button>
                     <button onClick={() => setIsDeleteOpen(true)} className="cursor-pointer">
-                        Delete
+                        <img src="/icons/delete.svg" className="h-5 w-5" />
                     </button>
                 </div>
             </div>
