@@ -6,8 +6,8 @@ export function DurationInfo() {
 
     return (
         <div className="flex flex-row justify-end my-2 px-2 shrink-0">
-            <p>
-                Total: <span>{formatTime(totalDuration)}</span>
+            <p className="bg-green px-6 py-1 rounded-full text-cream">
+                total: <span>{formatTime(totalDuration)}</span>
             </p>
         </div>
     );
