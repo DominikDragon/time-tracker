@@ -4,6 +4,7 @@ import { TrackingItem } from "./TrackingItem";
 
 export function TrackingList() {
     const { trackings, loadMoreTrackings } = useTracking();
+
     function handleTrackingScroll(event: React.UIEvent<HTMLDivElement>) {
         const container = event.currentTarget;
 
@@ -20,9 +21,13 @@ export function TrackingList() {
             className="min-h-0 flex-1 flex flex-col gap-4 overflow-y-auto overflow-x-hidden mt-6"
             onScroll={handleTrackingScroll}
         >
-            {trackings.map((tracking: Tracking) => (
-                <TrackingItem key={tracking.id} trackingData={tracking}/>
-            ))}
+            {trackings.length === 0 ? (
+                <p className="text-center text-brown bg-middle-green w-fit mx-auto rounded-full px-2">No trackings yet.</p>
+            ) : (
+                trackings.map((tracking: Tracking) => (
+                    <TrackingItem key={tracking.id} trackingData={tracking} />
+                ))
+            )}
         </div>
     );
 }
