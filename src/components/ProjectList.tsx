@@ -4,13 +4,17 @@ export function ProjectList() {
     const { projects } = useProject();
 
     return (
-        <div>
-            Projects
-            <div className="h-40 overflow-y-scroll">
-                {projects.map((project) => {
-                    return <p key={project.id}>{project.name}</p>;
-                })}
-            </div>
+        <div className="min-h-0 flex-1 overflow-y-auto flex flex-col gap-y-2">
+            {projects.map((project) => {
+                return (
+                    <div
+                        className="bg-light-green/60 rounded-[5px] flex flex-row justify-between items-center px-2 text-custom-lg"
+                        key={project.id}
+                    >
+                        {project.name}
+                    </div>
+                );
+            })}
         </div>
     );
 }
