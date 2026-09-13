@@ -17,7 +17,7 @@ export function SearchBar() {
     return (
         <div className="w-full px-2">
             <input
-                type="text"
+                type="search"
                 value={search}
                 onChange={(event) => handleSearchChange(event.target.value)}
                 placeholder="search"

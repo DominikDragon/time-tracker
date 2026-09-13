@@ -1,8 +1,10 @@
-import { useProject } from "../hooks/useProject";
+import type { Project } from "../types/project";
 
-export function ProjectList() {
-    const { projects } = useProject();
+type ProjectListProps = {
+    projects: Project[];
+};
 
+export function ProjectList({ projects }: ProjectListProps) {
     return (
         <div className="min-h-0 flex-1 overflow-y-auto flex flex-col gap-y-2">
             {projects.map((project) => {
