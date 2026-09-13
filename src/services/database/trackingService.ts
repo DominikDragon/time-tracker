@@ -4,7 +4,6 @@ import type {
     TrackingRaw,
     TrackingFilters,
     TrackingPagination,
-    TrackingCursor,
 } from "../../types/tracking";
 import type { Timer } from "../../types/timer";
 
@@ -73,19 +72,19 @@ function createTrackingWhereClause(filters: TrackingFilters): TrackingWhere {
     const params: unknown[] = [];
 
     if (filters.minDate) {
-        conditions.push(`created_at >= $${params.length + 1}`);
+        conditions.push(`trackings.created_at >= $${params.length + 1}`);
         params.push(filters.minDate);
     }
 
     if (filters.maxDate) {
-        conditions.push(`created_at < $${params.length + 1}`);
+        conditions.push(`trackings.created_at < $${params.length + 1}`);
         const exclusiveMaxDate = new Date(`${filters.maxDate}T00:00:00.000Z`);
         exclusiveMaxDate.setUTCDate(exclusiveMaxDate.getUTCDate() + 1);
         params.push(exclusiveMaxDate.toISOString());
     }
 
     if (filters.search) {
-        conditions.push(`summary LIKE $${params.length + 1}`);
+        conditions.push(`(summary LIKE $${params.length + 1} OR projects.name LIKE $${params.length + 1})`);
         params.push(`%${filters.search}%`);
     }
 
@@ -126,10 +125,10 @@ async function queryTrackings(
 
         conditions.push(`
             (
-                created_at < $${createdAtParam}
+                trackings.created_at < $${createdAtParam}
                 OR (
-                    created_at = $${createdAtParam}
-                    AND id < $${idParam}
+                    trackings.created_at = $${createdAtParam}
+                    AND trackings.id < $${idParam}
                 )
             )
         `);
@@ -144,14 +143,15 @@ async function queryTrackings(
 
     const query = `
         SELECT
-            id,
-            project_id,
-            duration_seconds,
-            summary,
-            created_at
+            trackings.id,
+            trackings.project_id,
+            trackings.duration_seconds,
+            trackings.summary,
+            trackings.created_at
         FROM trackings
+        JOIN projects ON projects.id = trackings.project_id
         ${whereClause}
-        ORDER BY created_at DESC, id DESC
+        ORDER BY trackings.created_at DESC, trackings.id DESC
         LIMIT $${limitParam}
     `;
 
@@ -167,6 +167,7 @@ async function queryTotalDuration(where: TrackingWhere): Promise<number> {
         `
             SELECT COALESCE(SUM(duration_seconds), 0) AS total_duration
             FROM trackings
+            JOIN projects ON projects.id = trackings.project_id
             ${where.clause}
         `,
         where.params,
