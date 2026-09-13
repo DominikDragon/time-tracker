@@ -14,7 +14,7 @@ export function ProjectList({ projects }: ProjectListProps) {
                 </div>
             ) : (
                 projects.map((project) => (
-                    <ProjectItem project={project}/>
+                    <ProjectItem key={project.id} project={project}/>
                 ))
             )}
         </div>
