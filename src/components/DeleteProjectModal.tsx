@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { Project } from "../types/project";
 import { useProject } from "../hooks/useProject";
-import { cutText } from "../utils/tracking";
+import { TruncatedText } from "./TruncatedText";
 
 type DeleteProjectModalProps = {
     project: Project;
@@ -39,7 +39,9 @@ export function DeleteProjectModal({ project, onClose }: DeleteProjectModalProps
                 </div>
 
                 <p>Are you sure you want to delete this project?</p>
-                <p className="text-green font-semibold">{cutText(project.name,20)}</p>
+                <p className="text-green font-semibold">
+                    <TruncatedText text={project.name} width={200}/>
+                </p>
 
                 {error && (
                     <div className="mt-2 rounded-[10px] bg-red-100 px-3 py-2">

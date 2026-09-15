@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Project } from "../types/project";
 import { EditProjectModal } from "./EditProjectModal";
 import { DeleteProjectModal } from "./DeleteProjectModal";
-import { cutText } from "../utils/tracking";
+import { TruncatedText } from "./TruncatedText";
 
 type ProjectItemProps = {
     project: Project;
@@ -18,7 +18,9 @@ export function ProjectItem({ project }: ProjectItemProps) {
                 key={project.id}
                 className="bg-light-green/60 rounded-[5px] flex flex-row justify-between items-center px-2 text-custom-lg"
             >
-                <p>{cutText(project.name, 30)}</p>
+                <p>
+                    <TruncatedText text={project.name} width={400}/>
+                </p>
                 <div className="flex flex-row gap-2">
                     <button onClick={() => setIsEditOpen(true)} className="cursor-pointer">
                         <img src="/icons/edit.svg" className="h-4.5 w-4.5" />

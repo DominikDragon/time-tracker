@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useProject } from "../hooks/useProject";
 import { useTimer } from "../hooks/useTimer";
 import type { Project } from "../types/project";
-import { cutText } from "../utils/tracking";
+import { TruncatedText } from "./TruncatedText";
 
 export function ProjectSelection() {
     const { projects } = useProject();
@@ -120,7 +120,7 @@ export function ProjectSelection() {
                                 handleProjectChange(project);
                             }}
                         >
-                            {cutText(project.name,25)}
+                            <TruncatedText text={project.name} width={240}/>
                         </button>
                     ))}
                 </div>

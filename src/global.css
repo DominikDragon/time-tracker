@@ -37,3 +37,10 @@ body,
     background-repeat: space no-repeat;
     background-position: center;
 }
+
+.truncate {
+    max-width: var(--text-width);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
