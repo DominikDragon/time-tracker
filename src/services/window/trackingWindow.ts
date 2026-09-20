@@ -13,8 +13,8 @@ export async function openTrackingWindow() {
     const trackingWindow = new WebviewWindow(TRACKING_WINDOW_LABEL, {
         url: "/trackings",
         title: "Trackings",
-        width: 640,
-        height: 440,
+        width: 960,
+        height: 660,
         resizable: false,
         decorations: false,
         transparent: true,

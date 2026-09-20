@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 
-import { cutText } from "../utils/tracking";
+import { TruncatedText } from "./TruncatedText";
 
 type SummaryDropdownProps = {
     summary: string;
@@ -62,7 +62,9 @@ export function SummaryDropdown({ summary }: SummaryDropdownProps) {
             }}
             onMouseLeave={() => setIsOpen(false)}
         >
-            <span className="block truncate">{cutText(summary, 14)}</span>
+            <span className="block truncate">
+                <TruncatedText text={summary} width={220} />
+            </span>
             {isOpen &&
                 position &&
                 createPortal(
