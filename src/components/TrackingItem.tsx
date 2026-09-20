@@ -25,7 +25,7 @@ export function TrackingItem({ trackingData }: TrackingItemProps) {
             </span>
             <span className="w-full min-w-0 text-left px-2">
                 
-                <TruncatedText text={getProjectName(trackingData.projectId)} width={200}/>
+                <TruncatedText text={getProjectName(trackingData.projectId)} width={220}/>
             </span>
             <span className="w-full min-w-0 text-left px-2">
                 <SummaryDropdown summary={trackingData.summary} />

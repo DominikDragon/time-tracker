@@ -63,7 +63,7 @@ export function SummaryDropdown({ summary }: SummaryDropdownProps) {
             onMouseLeave={() => setIsOpen(false)}
         >
             <span className="block truncate">
-                <TruncatedText text={summary} width={140} />
+                <TruncatedText text={summary} width={220} />
             </span>
             {isOpen &&
                 position &&
